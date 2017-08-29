@@ -1,0 +1,6 @@
+
+description = 'springbox-config-server'
+dependencies {
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter', version:'1.0.1.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-config-server', version:'1.0.1.RELEASE'
+}

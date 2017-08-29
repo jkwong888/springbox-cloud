@@ -1,0 +1,29 @@
+
+description = 'springbox-api-gateway'
+dependencies {
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zuul', version:'1.0.1.RELEASE'
+    compile(group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version:'1.0.1.RELEASE') {
+exclude(module: 'guice-grapher')
+exclude(module: 'guice-assistedinject')
+exclude(module: 'jsr166y')
+exclude(module: 'xbean-finder')
+exclude(module: 'asm-all')
+exclude(module: 'guice-multibindings')
+exclude(module: 'xbean-bundleutils')
+exclude(module: 'commons-math')
+exclude(module: 'netflix-infix')
+exclude(module: 'joda-time')
+exclude(module: 'commons-jxpath')
+exclude(module: 'antlr-runtime')
+exclude(module: 'stringtemplate')
+exclude(module: 'antlr')
+exclude(module: 'gson')
+exclude(module: 'annotations')
+exclude(module: 'dagger')
+exclude(module: 'blitz4j')
+exclude(module: 'hibernate-validator')
+    }
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp', version:'1.0.1.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-security', version:'1.0.1.RELEASE'
+    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version:'2.0.7.RELEASE'
+}
