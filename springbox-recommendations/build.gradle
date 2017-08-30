@@ -2,7 +2,7 @@
 description = 'springbox-recommendations'
 dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter', version:'1.0.1.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-neo4j-rest', version:'3.2.2.RELEASE'
+    compile group: 'org.springframework.data', name: 'spring-data-neo4j-rest', version:'3.4.2.RELEASE'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector', version:'1.1.1.RELEASE'
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector', version:'1.1.1.RELEASE') {
 exclude(module: 'log4j')
