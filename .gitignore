@@ -4,4 +4,7 @@ target
 .gradle
 **/.*.sw*
 **/build/
+.project
+.settings
+.classpath
 

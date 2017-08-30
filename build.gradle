@@ -42,25 +42,24 @@ subprojects {
 
 
   task packageSources(type: Jar) {
-classifier = 'sources'
-from sourceSets.main.allSource
-
-}
-artifacts.archives packageSources
-  repositories {
-    mavenLocal()
-    
-    maven { url "http://repo.maven.apache.org/maven2" }
+    classifier = 'sources'
+    from sourceSets.main.allSource
   }
 
-  
-  dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.2.3.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.2.3.RELEASE'
-    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.2.3.RELEASE') {
-exclude(module: 'commons-logging')
+  artifacts.archives packageSources
+    repositories {
+      mavenLocal()
+      
+      maven { url "http://repo.maven.apache.org/maven2" }
     }
-}
-
+  
+    
+    dependencies {
+      compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.2.3.RELEASE'
+      compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.2.3.RELEASE'
+      testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.2.3.RELEASE') {
+        exclude(module: 'commons-logging')
+      }
+  }
   
 }

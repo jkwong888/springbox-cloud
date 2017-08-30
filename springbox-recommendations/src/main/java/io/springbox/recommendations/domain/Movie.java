@@ -1,8 +1,8 @@
 package io.springbox.recommendations.domain;
 
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.Indexed;
-import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.Index;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
 public class Movie {
@@ -19,7 +19,7 @@ public class Movie {
                 '}';
     }
 
-    @Indexed(unique = true)
+    @Index(unique = true)
     private String mlId;
     private String title;
 
