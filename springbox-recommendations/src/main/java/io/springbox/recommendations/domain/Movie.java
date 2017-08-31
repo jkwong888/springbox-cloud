@@ -1,8 +1,12 @@
 package io.springbox.recommendations.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class Movie {
@@ -22,6 +26,10 @@ public class Movie {
     @Index(unique = true)
     private String mlId;
     private String title;
+    
+    @Relationship(type="LIKES", direction = Relationship.INCOMING)
+    private List<Likes> likes = new ArrayList<>();
+
 
     public Long getId() {
         return id;

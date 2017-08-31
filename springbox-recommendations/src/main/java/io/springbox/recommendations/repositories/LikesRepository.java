@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface LikesRepository extends GraphRepository<Likes> {
 
-    @Query("MATCH (m:Movie {mlId:{0}})<-[likes:LIKES]-(p:Person {userName:{1}}) return likes")
-    List<Likes> likesFor(String mlId, String userName);
+    @Query("MATCH (m:Movie {id:{0}})<-[likes:LIKES]-(p:Person {userName:{1}}) return likes")
+    List<Likes> likesFor(String id, String userName);
 }

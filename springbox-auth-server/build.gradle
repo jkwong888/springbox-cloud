@@ -1,6 +1,6 @@
 
 description = 'springbox-auth-server'
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'1.2.3.RELEASE'
-    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version:'2.0.7.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
 }

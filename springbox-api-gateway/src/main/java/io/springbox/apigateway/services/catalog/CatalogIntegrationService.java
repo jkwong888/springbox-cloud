@@ -2,7 +2,9 @@ package io.springbox.apigateway.services.catalog;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.netflix.hystrix.contrib.javanica.command.ObservableResult;
+
+import java.util.concurrent.Callable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +30,14 @@ public class CatalogIntegrationService {
             }
     )
     public Observable<Movie> getMovie(final String mlId) {
-        return new ObservableResult<Movie>() {
+        return Observable.fromCallable(new Callable<Movie>() {
             @Override
-            public Movie invoke() {
+            public Movie call() throws Exception {
                 final Movie movie = restTemplate.getForObject("http://springbox-catalog/movies/{mlId}", Movie.class, mlId);
                 log.debug(movie);
                 return movie;
             }
-        };
+        });
     }
 
     @SuppressWarnings("unused")
