@@ -11,6 +11,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,7 +27,7 @@ public class RecommendationsIntegrationService {
 
     @Autowired
     @LoadBalanced
-    private OAuth2RestOperations restTemplate;
+    private OAuth2RestTemplate restTemplate;
 
     @Autowired
     @Qualifier("loadBalancedRestTemplate")

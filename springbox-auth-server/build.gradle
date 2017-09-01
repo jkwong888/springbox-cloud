@@ -1,6 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'wro4j'
 
 description = 'springbox-auth-server'
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    
+    webjars 'org.webjars:jquery:2.1.1'
+    webjars 'org.webjars:bootstrap:3.2.0'
 }
+
+webResources {
+    bundle ('wro') {
+        js 'webjars/jquery/2.1.1/jquery.min.js'
+        postProcessor 'less4j','jsMin'
+    }
+
+    bundle ('wro') {
+        preProcessor 'lessCssImport'
+        css 'webjars/bootstrap/3.2.0/less/bootstrap.less'
+    }
+}
+
+task moveJSResources(type: Copy) {
+  eachFile { println it.file }
+  from "$project.buildDir/resources/main/static"
+  include '*.js'
+  into "$project.buildDir/resources/main/static/js/"
+}
+
+task moveCSSResources(type: Copy) {
+  eachFile { println it.file }
+  from "$project.buildDir/resources/main/static"
+  include "*.css"
+  into "$project.buildDir/resources/main/static/css/"
+}
+
+
+classes.dependsOn moveJSResources, moveCSSResources
+moveJSResources.dependsOn processWebResources
+moveCSSResources.dependsOn processWebResources
