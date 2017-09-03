@@ -7,11 +7,17 @@ import org.springframework.data.neo4j.repository.GraphRepository;
 public interface MovieRepository extends GraphRepository<Movie> {
     Movie findByMlId(String mlId);
 
-    @Query("MATCH (p:Person) WHERE p.userName = {0} MATCH p-[:LIKES]->movie<-[:LIKES]-slm-[:LIKES]->recommendations " +
-            "WHERE not(p = slm) and not (p--recommendations) return distinct recommendations")
+    @Query("MATCH (p:Person)-[:LIKES]->(m:Movie), " +
+           "(other:Person)-[:LIKES]->(m), " +
+    	   "(other)-[:LIKES]->(recommendation:Movie) " +
+           "WHERE NOT (p)-[:LIKES]->(recommendation) " +
+    	   "AND p.userName = {0}" +
+           "RETURN DISTINCT recommendation")
     Iterable<Movie> recommendedMoviesFor(String userName);
 
-    @Query("MATCH (movie:Movie) WHERE movie.mlId = {0} MATCH movie<-[:LIKES]-slm-[:LIKES]->recommendations " +
-            "RETURN distinct recommendations")
+    @Query("MATCH (p:Person)-[:LIKES]->(m:Movie), " + 
+           "(p)-[:LIKES]->(recommendation:Movie) " + 
+    	   "WHERE m.mlId = {0} " +
+           "RETURN distinct recommendation")
     Iterable<Movie> moviesLikedByPeopleWhoLiked(String mlId);
 }

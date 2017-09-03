@@ -1,10 +1,20 @@
 server:
   port: 8082
+  
 security:
   oauth2:
     resource:
       userInfoUri: http://localhost:9999/uaa/user
+      
 logging:
   logging:
     org.springframework.web: DEBUG
     io.springbox.recommendations: DEBUG
+
+spring:
+  data:
+    neo4j:
+      driver: org.neo4j.ogm.drivers.http.driver.HttpDriver 
+      uri: http://localhost:7474
+      username: neo4j
+      password: secret

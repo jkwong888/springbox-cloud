@@ -1,7 +1,10 @@
 package io.springbox.recommendations.domain;
 
+import java.util.Set;
+
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 public class Person {
@@ -21,6 +24,9 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
+    
+    @Relationship(type="LIKES")
+    public Set<Movie> movies;
 
     public Long getId() {
         return id;

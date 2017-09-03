@@ -2,12 +2,14 @@ package io.springbox.recommendations.controllers;
 
 import io.springbox.recommendations.domain.Likes;
 import io.springbox.recommendations.repositories.LikesRepository;
+
+import java.security.Principal;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,9 +24,8 @@ public class LikesController {
     LikesRepository likesRepository;
 
     @RequestMapping(value = "/likes", method = RequestMethod.GET)
-    @PreAuthorize("#userName == authentication.name")
-    public Iterable<Likes> likes() {
-        return likesRepository.findAll();
+    public Iterable<Likes> likes(Principal principal) {
+        return likesRepository.likesFor(principal.getName());
     }
 
     @RequestMapping(value = "/does/{userName}/like/{mlId}", method = RequestMethod.GET)

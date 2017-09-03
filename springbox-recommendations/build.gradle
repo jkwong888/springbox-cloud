@@ -2,6 +2,9 @@
 description = 'springbox-recommendations'
 dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-security'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-neo4j'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector'
@@ -30,6 +33,7 @@ exclude(module: 'log4j')
         exclude(module: 'blitz4j')
         exclude(module: 'hibernate-validator')
 	}
+    compile group: 'org.neo4j', name: 'neo4j', version: '3.1.1'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-security'
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
     
