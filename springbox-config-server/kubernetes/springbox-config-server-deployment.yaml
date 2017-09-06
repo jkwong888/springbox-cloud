@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: springbox
+    component: config-server
+  name: springbox-config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springbox
+      component: config-server
+  template:
+    metadata:
+      labels:
+        app: springbox
+        component: config-server
+    spec:
+      containers:
+      - image: jkwong/springbox-config-server:latest
+        imagePullPolicy: Always
+        name: springbox-config-server
+        ports:
+        - containerPort: 8888
+          name: http 
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: native
+        - name: SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS
+          value: file:///config
+        volumeMounts:
+        - mountPath: /config
+          name: config-server-data
+      volumes:
+      - name: config-server-data
+        configMap:
+          name: springbox-config-server-config
+

@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: springbox-recommendations-job-populate-db
+spec:
+  template:
+    metadata:
+      name: springbox-recommendations-job-populate-db
+      labels:
+        app: springbox
+        component: recommendations
+        job: populate-db
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: populate-db
+        image: everpeace/curl-jq:latest
+        command: ["/bin/bash", "-c" ]
+        args: 
+        - >
+          set -x;
+          ROUTE=http://springbox-recommendations:8082;
+          AUTH_ROUTE=http://springbox-auth-server:9999/uaa;
+          TOKEN=`curl -X POST -u acme:acmesecret ${AUTH_ROUTE}/oauth/token\?grant_type=password\&username=mstine\&password=secret\&scope=openid | jq -r '.access_token'`;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/people -X POST -d '{"userName":"mstine","firstName":"Matt","lastName":"Stine"}' -H "Content-Type: application/json"; do sleep 1; done;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/people -X POST -d '{"userName":"starbuxman","firstName":"Josh","lastName":"Long"}' -H "Content-Type: application/json"; do sleep 1; done;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/people -X POST -d '{"userName":"littleidea","firstName":"Andrew","lastName":"Shafer"}' -H "Content-Type: application/json"; do sleep 1; done;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/movies -X POST -d '{"mlId":"1","title":"Toy Story (1995)"}' -H "Content-Type: application/json"; do sleep 1; done;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/movies -X POST -d '{"mlId":"2","title":"GoldenEye (1995)"}' -H "Content-Type: application/json"; do sleep 1; done;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/movies -X POST -d '{"mlId":"3","title":"Four Rooms (1995)"}' -H "Content-Type: application/json"; do sleep 1; done;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/movies -X POST -d '{"mlId":"4","title":"Get Shorty (1995)"}' -H "Content-Type: application/json"; do sleep 1; done;
+          until curl -H "Authorization: Bearer ${TOKEN}" -i ${ROUTE}/movies -X POST -d '{"mlId":"5","title":"Copycat (1995)"}' -H "Content-Type: application/json"; do sleep 1; done;
+          TOKEN=`curl -X POST -u acme:acmesecret ${AUTH_ROUTE}/oauth/token\?grant_type=password\&username=mstine\&password=secret\&scope=openid | jq -r '.access_token'`;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/mstine/likes/1; do sleep 1; done;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/mstine/likes/2; do sleep 1; done;
+          TOKEN=`curl -X POST -u acme:acmesecret ${AUTH_ROUTE}/oauth/token\?grant_type=password\&username=starbuxman\&password=secret\&scope=openid | jq -r '.access_token'`;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/starbuxman/likes/2; do sleep 1; done;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/starbuxman/likes/4; do sleep 1; done;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/starbuxman/likes/5; do sleep 1; done;
+          TOKEN=`curl -X POST -u acme:acmesecret ${AUTH_ROUTE}/oauth/token\?grant_type=password\&username=littleidea\&password=secret\&scope=openid | jq -r '.access_token'`;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/littleidea/likes/2; do sleep 1; done;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/littleidea/likes/3; do sleep 1; done;
+          until curl -i -H "Authorization: Bearer ${TOKEN}" -X POST ${ROUTE}/recommendations/littleidea/likes/5; do sleep 1; done;

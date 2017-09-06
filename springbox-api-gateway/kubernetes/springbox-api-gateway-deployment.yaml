@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: springbox
+    component: api-gateway
+  name: springbox-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springbox
+      component: api-gateway
+  template:
+    metadata:
+      labels:
+        app: springbox
+        component: api-gateway
+    spec:
+      containers:
+      - image: jkwong/springbox-api-gateway:latest
+        imagePullPolicy: Always
+        name: springbox-api-gateway
+        ports:
+        - containerPort: 9000
+          name: http 
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        env:
+        - name: SPRING_CLOUD_CONFIG_ENABLED
+          value: "true"
+        - name: SPRING_CLOUD_CONFIG_URI
+          value: http://springbox-config-server:8888
+

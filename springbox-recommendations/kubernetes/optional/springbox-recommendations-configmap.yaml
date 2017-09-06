@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springbox-recommendations-config
+  labels:
+    app: springbox
+    component: recommendations
+data:
+  application.yaml: |+
+    logging:
+      logging:
+        org.springframework.web: DEBUG
+        io.springbox.recommendations: DEBUG
+    
+    spring:
+      data:
+        neo4j:
+          driver: org.neo4j.ogm.drivers.http.driver.HttpDriver 
+          uri: http://neo4j-neo4j:7474
+          username: neo4j
+          password: secret

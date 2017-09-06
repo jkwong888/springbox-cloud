@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springbox-reviews-config
+  labels:
+    app: springbox
+    component: reviews
+data:
+  application.yaml: |+
+    spring:
+      data:
+        mongodb:
+          uri: mongodb://mongodb-mongodb:27017/reviews
+

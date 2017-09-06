@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: springbox
+    component: catalog
+  name: springbox-catalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springbox
+      component: catalog
+  template:
+    metadata:
+      labels:
+        app: springbox
+        component: catalog
+    spec:
+      containers:
+      - image: jkwong/springbox-catalog:latest
+        imagePullPolicy: Always
+        name: springbox-catalog
+        ports:
+        - containerPort: 8080
+          name: http 
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        env:
+        - name: SPRING_CLOUD_CONFIG_URI
+          value: http://springbox-config-server:8888
+        - name: MANAGEMENT_SECURITY_ENABLED
+          value: "false"
+

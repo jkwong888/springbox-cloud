@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springbox-config-server-config
+  labels:
+    app: springbox
+    component: config-server
+data:
+  application.yaml: |+
+    spring:
+      rabbitmq:
+        addresses: rabbitmq:5672
+
+    eureka:
+      client:
+        serviceUrl:
+          defaultZone: http://springbox-eureka:8761/eureka/
+      instance:
+        preferIpAddress: true
+
+    security:
+      oauth2:
+        resource:
+          userInfoUri: http://springbox-auth-server:9999/uaa/user
+
+  springbox-catalog.yaml: |+
+    spring:
+      jpa:
+        hibernate:
+          ddl-auto: create-drop
+   
+    ---
+    
+    spring:
+      profiles: default
+      jpa:
+        database: HSQL
+   
+    ---
+    
+    spring:
+      profiles: cloud
+      jpa:
+        database: POSTGRESQL
+
+  springbox-recommendations.yaml: |+
+    logging:
+      logging:
+        org.springframework.web: DEBUG
+        io.springbox.recommendations: DEBUG
+    
+    spring:
+      data:
+        neo4j:
+          driver: org.neo4j.ogm.drivers.http.driver.HttpDriver 
+          uri: http://neo4j:7474
+          username: neo4j
+          password: secret
+    
+  springbox-api-gateway.yaml: |+
+    zuul:
+      routes:
+        springbox-catalog: /catalog/**
+        springbox-reviews: /reviews/**
+        springbox-recommendations: /recommendations/**
+        user:
+          path: /user/**
+          url: http://springbox-auth-server:9999/uaa/user
+    
+    security:
+      user:
+        password: password
+      oauth2:
+        client:
+          accessTokenUri: http://springbox-auth-server:9999/uaa/oauth/token
+          userAuthorizationUri: https://192.168.0.145/uaa/oauth/authorize
+          clientId: acme
+          clientSecret: acmesecret
+    
+    logging:
+      level:
+        org.springframework.security: DEBUG 
+        org.springframework.cloud.netflix: INFO
+        com.netflix.zuul: INFO
+        io.springbox.apigateway: DEBUG
+
+  springbox-reviews.yaml: |+
+    spring:
+      data:
+        mongodb:
+          uri: mongodb://mongodb:27017/reviews
+

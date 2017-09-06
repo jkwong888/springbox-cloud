@@ -1,0 +1,45 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: neo4j
+  name: neo4j
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: neo4j
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      containers:
+      - image: neo4j:3.1.1
+        imagePullPolicy: IfNotPresent
+        name: neo4j
+        env:
+        - name: NEO4J_AUTH
+          value: neo4j/secret
+        ports:
+        - containerPort: 7474
+          name: http 
+          protocol: TCP
+        - containerPort: 7687
+          name: bolt
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /data
+          name: neo4j-data
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - persistentVolumeClaim: 
+          claimName: neo4j-data
+        name: neo4j-data
+

@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: springbox-api-gateway
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /springbox
+        backend:
+          serviceName: springbox-api-gateway
+          servicePort: 9000
+      - path: /uaa
+        backend:
+          serviceName: springbox-auth-server
+          servicePort: 9999

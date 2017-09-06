@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: springbox-auth-server
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /uaa
+    ingress.bluemix.net/rewrite-path: "serviceName=springbox-auth-server rewrite=/uaa"
+spec:
+  rules:
+  - host: jkwong-kube-dal10.us-south.containers.mybluemix.net
+    http:
+      paths:
+      - path: /uaa
+        backend:
+          serviceName: springbox-auth-server
+          servicePort: 9999

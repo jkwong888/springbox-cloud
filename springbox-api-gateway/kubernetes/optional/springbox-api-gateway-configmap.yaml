@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springbox-api-gateway-config
+  labels:
+    app: springbox
+    component: api-gateway
+data:
+  application.yaml: |+
+    zuul:
+      routes:
+        springbox-catalog: /catalog/**
+        springbox-reviews: /reviews/**
+        springbox-recommendations: /recommendations/**
+        user:
+          path: /user/**
+          url: http://springbox-auth-server:9999/uaa/user
+    
+    security:
+      user:
+        password: password
+      oauth2:
+        client:
+          accessTokenUri: http://jkwong-kube-dal10.us-south.containers.mybluemix.net/uaa/oauth/token
+          userAuthorizationUri: http://jkwong-kube-dal10.us-south.containers.mybluemix.net/uaa/oauth/authorize
+          clientId: acme
+          clientSecret: acmesecret
+    
+    logging:
+      level:
+        org.springframework.security: DEBUG 
+        org.springframework.cloud.netflix: INFO
+        com.netflix.zuul: INFO
+        io.springbox.apigateway: DEBUG
+

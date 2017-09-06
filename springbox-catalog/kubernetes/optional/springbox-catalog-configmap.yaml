@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springbox-catalog-config
+  labels:
+    app: springbox
+    component: catalog
+data:
+  application.yaml: |+
+    spring:
+      jpa:
+        hibernate:
+          ddl-auto: create-drop
+   
+    ---
+    
+    spring:
+      profiles: default
+      jpa:
+        database: HSQL
+   
+    ---
+    
+    spring:
+      profiles: cloud
+      jpa:
+        database: POSTGRESQL
+
+

@@ -2,6 +2,7 @@
 description = 'springbox-reviews'
 dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector'
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector') {

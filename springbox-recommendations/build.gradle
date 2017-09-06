@@ -2,6 +2,7 @@
 description = 'springbox-recommendations'
 dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-security'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2'

@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - image: mongo:3.4
+        imagePullPolicy: IfNotPresent
+        name: mongodb
+        ports:
+        - containerPort: 27017
+          name: mongodb
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /data
+          name: mongodb-data
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - persistentVolumeClaim: 
+          claimName: mongodb-data
+        name: mongodb-data
+
