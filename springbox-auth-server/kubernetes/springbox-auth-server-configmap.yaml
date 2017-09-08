@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springbox-auth-server-config
+  labels:
+    app: springbox
+    component: auth-server
+data:
+  application.properties: |+
+    server.port=9999
+    security.user.password=password
+    server.contextPath=/uaa
+    security.basic.enabled=false
+
+  bootstrap.yaml: |+
+    spring:
+      cloud:
+        config:
+          enabled: true
+          uri: http://springbox-config-server:8888

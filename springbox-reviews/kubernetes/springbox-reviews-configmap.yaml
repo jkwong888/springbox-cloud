@@ -11,4 +11,10 @@ data:
       data:
         mongodb:
           uri: mongodb://mongodb-mongodb:27017/reviews
-
+  bootstrap.yaml: |+
+    spring:
+      application:
+        name: springbox-reviews
+      cloud:
+        config:
+          uri: http://springbox-config-server:8888

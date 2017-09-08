@@ -33,3 +33,10 @@ data:
         com.netflix.zuul: INFO
         io.springbox.apigateway: DEBUG
 
+  bootstrap.yaml: |+
+    spring:
+      application:
+        name: springbox-api-gateway
+      cloud:
+        config:
+          uri: http://springbox-config-server:8888

@@ -19,3 +19,10 @@ data:
           uri: http://neo4j-neo4j:7474
           username: neo4j
           password: secret
+  bootstrap.yaml: |+
+    spring:
+      application:
+        name: springbox-recommendations
+      cloud:
+        config:
+          uri: http://springbox-config-server:8888

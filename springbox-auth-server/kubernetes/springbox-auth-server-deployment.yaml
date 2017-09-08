@@ -29,9 +29,10 @@ spec:
           requests:
             cpu: 100m
             memory: 256Mi
-        env:
-        - name: SPRING_CLOUD_CONFIG_ENABLED
-          value: "true"
-        - name: SPRING_CLOUD_CONFIG_URI
-          value: http://springbox-config-server:8888
-
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: springbox-auth-server-config

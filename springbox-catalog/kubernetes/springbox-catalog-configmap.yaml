@@ -26,4 +26,10 @@ data:
       jpa:
         database: POSTGRESQL
 
-
+  bootstrap.yaml: |+
+    spring:
+      application:
+        name: springbox-catalog
+      cloud:
+        config:
+          uri: http://springbox-config-server:8888

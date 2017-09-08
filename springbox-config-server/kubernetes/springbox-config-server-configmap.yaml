@@ -7,6 +7,9 @@ metadata:
     component: config-server
 data:
   application.yaml: |+
+    configserver: true
+    bus: true
+
     spring:
       rabbitmq:
         addresses: rabbitmq:5672
@@ -17,6 +20,9 @@ data:
           defaultZone: http://springbox-eureka:8761/eureka/
       instance:
         preferIpAddress: true
+        leaseRenewalIntervalInSeconds: 10
+        metadataMap:
+          instanceId: ${spring.application.name}:${server.port:8080}
 
     security:
       oauth2:
