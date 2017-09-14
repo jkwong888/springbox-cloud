@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springbox-reviews-config
+  name: springbox-reviews
   labels:
     app: springbox
     component: reviews

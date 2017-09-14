@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: Always
         name: springbox-recommendations
         ports:
-        - containerPort: 8082
+        - containerPort: 8080
           name: http 
           protocol: TCP
         resources:
@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: springbox-recommendations-config
+          name: springbox-recommendations

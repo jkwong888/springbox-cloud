@@ -2,7 +2,6 @@
 description = 'springbox-recommendations'
 dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-security'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2'
@@ -12,7 +11,6 @@ dependencies {
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector') {
 exclude(module: 'log4j')
     }
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp'
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka') {
         exclude(module: 'guice-grapher')
         exclude(module: 'guice-assistedinject')

@@ -1,7 +1,7 @@
 var springbox = angular.module('springbox');
 
 springbox.controller('home', function ($rootScope, $scope, $http) {
-    $http.get('/catalog/genres').success(function (data) {
+    $http.get('catalog/genres').success(function (data) {
         $scope.genres = data;
     });
 

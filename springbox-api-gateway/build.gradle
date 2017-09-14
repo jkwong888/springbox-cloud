@@ -26,8 +26,6 @@ dependencies {
         exclude(module: 'hibernate-validator')
 	}
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-ribbon'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-security'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2'
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'

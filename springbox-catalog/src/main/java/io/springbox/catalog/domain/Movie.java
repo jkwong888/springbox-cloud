@@ -1,6 +1,8 @@
 package io.springbox.catalog.domain;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +23,7 @@ public class Movie {
     @JoinTable(name = "movies_genres",
             joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
-    private List<Genre> genres;
+    private List<Genre> genres = new ArrayList<Genre>();
 
     @Column(nullable = false)
     private int numberInStock;

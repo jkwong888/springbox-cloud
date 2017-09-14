@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: Always
         name: springbox-api-gateway
         ports:
-        - containerPort: 9000
+        - containerPort: 8080
           name: http 
           protocol: TCP
         resources:
@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: springbox-api-gateway-config
+          name: springbox-api-gateway

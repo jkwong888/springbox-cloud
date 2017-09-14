@@ -48,11 +48,11 @@ subprojects {
   artifacts.archives packageSources
   
   repositories {
-    mavenLocal()
     maven {
       url 'https://repo.spring.io/libs-release/'
     }
 
+    mavenCentral()
     jcenter()
   }
   
@@ -66,6 +66,9 @@ subprojects {
   dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp'
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test') {
       exclude(module: 'commons-logging')
     }

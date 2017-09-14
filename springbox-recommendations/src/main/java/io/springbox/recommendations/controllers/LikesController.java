@@ -4,6 +4,7 @@ import io.springbox.recommendations.domain.Likes;
 import io.springbox.recommendations.repositories.LikesRepository;
 
 import java.security.Principal;
+import java.util.Collections;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
 @RestController
 public class LikesController {
 
@@ -24,11 +28,23 @@ public class LikesController {
     LikesRepository likesRepository;
 
     @RequestMapping(value = "/likes", method = RequestMethod.GET)
+    @HystrixCommand(
+		fallbackMethod = "defaultLikes",
+		commandProperties = {
+			@HystrixProperty(name = "execution.isolation.strategy", value = "SEMAPHORE")
+		}
+    )
     public Iterable<Likes> likes(Principal principal) {
         return likesRepository.likesFor(principal.getName());
     }
 
     @RequestMapping(value = "/does/{userName}/like/{mlId}", method = RequestMethod.GET)
+    @HystrixCommand(
+		fallbackMethod = "defaultLikesFor",
+		commandProperties = {
+			@HystrixProperty(name = "execution.isolation.strategy", value = "SEMAPHORE")
+		}
+	)
     public ResponseEntity<Boolean> likesFor(@PathVariable("mlId") String mlId, @PathVariable("userName") String userName) {
         log.debug(String.format("/does/%s/like/%s endpoint requested!", userName, mlId));
         int likes = likesRepository.likesFor(mlId, userName).size();
@@ -38,5 +54,13 @@ public class LikesController {
         } else {
             return new ResponseEntity<>(false, HttpStatus.OK);
         }
+    }
+    
+    public Iterable<Likes> defaultLikes(Principal principal) {
+    	return Collections.emptyList();
+    }
+    
+    public ResponseEntity<Boolean> defaultLikesFor(String mlId, String userName) {
+    	return new ResponseEntity<>(false, HttpStatus.OK);
     }
 }

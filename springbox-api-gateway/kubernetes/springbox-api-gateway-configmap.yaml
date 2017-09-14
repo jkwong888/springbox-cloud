@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springbox-api-gateway-config
+  name: springbox-api-gateway
   labels:
     app: springbox
     component: api-gateway

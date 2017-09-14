@@ -7,7 +7,6 @@ dependencies {
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     
     webjars 'org.webjars:jquery:2.1.1'
     webjars 'org.webjars:bootstrap:3.2.0'

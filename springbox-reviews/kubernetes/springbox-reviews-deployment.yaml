@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: Always
         name: springbox-reviews
         ports:
-        - containerPort: 8081
+        - containerPort: 8080
           name: http 
           protocol: TCP
         resources:
@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: springbox-reviews-config
+          name: springbox-reviews

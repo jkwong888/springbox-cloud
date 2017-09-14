@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springbox-auth-server-config
+  name: springbox-auth-server
   labels:
     app: springbox
     component: auth-server

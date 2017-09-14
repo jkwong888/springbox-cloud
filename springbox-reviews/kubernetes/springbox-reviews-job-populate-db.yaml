@@ -19,7 +19,7 @@ spec:
         args: 
         - >
           set -x;
-          ROUTE=http://springbox-reviews:8081;
+          ROUTE=http://springbox-reviews:8080;
           AUTH_ROUTE=http://springbox-auth-server:9999/uaa;
           TOKEN=`curl -X POST -u acme:acmesecret ${AUTH_ROUTE}/oauth/token\?grant_type=password\&username=mstine\&password=secret\&scope=openid | jq -r '.access_token'`;
           until curl --connect-timeout 5 --max-time 10 --retry 5 --retry-delay 1 --retry-max-time 40  -i -H "Authorization: Bearer ${TOKEN}" ${ROUTE}/reviews -X POST -d '{"userName":"mstine","mlId":"1","title":"Toy Story (1995)","review":"Great movie!","rating":"5"}' -H "Content-Type: application/json"; do sleep 1; done;

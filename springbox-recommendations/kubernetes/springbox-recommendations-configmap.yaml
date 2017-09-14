@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springbox-recommendations-config
+  name: springbox-recommendations
   labels:
     app: springbox
     component: recommendations

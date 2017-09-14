@@ -47,7 +47,8 @@ public class SpringboxApiGatewayApplication  extends WebSecurityConfigurerAdapte
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.logout().and().antMatcher("/**").authorizeRequests()
-				.antMatchers("/index.html", "/**/*.html", "/home.html", "/", "/login", "/beans").permitAll()
+				.antMatchers("/index.html", "/**/*.html", "/home.html", "/", "/login", "/beans", "/hystrix.stream").permitAll()
+				.antMatchers(HttpMethod.OPTIONS).permitAll()
 				.antMatchers(HttpMethod.GET, "/recommendations/**","/reviews/**","/people/**","/movie/**","/catalog/**","/likes/**").permitAll()
 				.anyRequest().authenticated().and()
 				.csrf()

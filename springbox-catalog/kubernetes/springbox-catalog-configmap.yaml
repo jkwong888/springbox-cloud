@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springbox-catalog-config
+  name: springbox-catalog
   labels:
     app: springbox
     component: catalog

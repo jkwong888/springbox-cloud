@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springbox-config-server-config
+  name: springbox-config-server
   labels:
     app: springbox
     component: config-server
@@ -30,26 +30,29 @@ data:
           userInfoUri: http://springbox-auth-server:9999/uaa/user
 
   springbox-catalog.yaml: |+
+    server:
+      port: 8080
+
     spring:
       jpa:
         hibernate:
           ddl-auto: create-drop
-   
     ---
-    
     spring:
       profiles: default
       jpa:
         database: HSQL
    
     ---
-    
     spring:
       profiles: cloud
       jpa:
         database: POSTGRESQL
 
   springbox-recommendations.yaml: |+
+    server:
+      port: 8080
+ 
     logging:
       logging:
         org.springframework.web: DEBUG
@@ -64,6 +67,10 @@ data:
           password: secret
     
   springbox-api-gateway.yaml: |+
+    server:
+      port: 8080
+      context-path: /springbox
+ 
     zuul:
       routes:
         springbox-catalog: /catalog/**
@@ -91,8 +98,22 @@ data:
         io.springbox.apigateway: DEBUG
 
   springbox-reviews.yaml: |+
+    server:
+      port: 8080
+ 
     spring:
       data:
         mongodb:
           uri: mongodb://mongodb:27017/reviews
 
+  springbox-hystrix-dashboard.yaml: |+
+    server:
+      context-path: /hystrix-dashboard
+
+  springbox-turbine-server.yaml: |+
+    turbine:
+      aggregator:
+        clusterConfig: SPRINGBOX
+
+    InstanceDiscovery:
+      impl: com.netflix.turbine.discovery.EurekaInstanceDiscovery.class

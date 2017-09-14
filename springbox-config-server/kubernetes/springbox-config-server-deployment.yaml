@@ -40,5 +40,5 @@ spec:
       volumes:
       - name: config-server-data
         configMap:
-          name: springbox-config-server-config
+          name: springbox-config-server
 

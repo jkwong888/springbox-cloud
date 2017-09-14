@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: springbox-eureka-config
+          name: springbox-eureka

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springbox-eureka-config
+  name: springbox-eureka
   labels:
     app: springbox
     component: eureka

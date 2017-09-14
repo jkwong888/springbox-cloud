@@ -1,7 +1,7 @@
 var springbox = angular.module('springbox');
 
 springbox.controller('movie', function ($rootScope, $scope, $http, $routeParams) {
-    $http.get('/movie/' + $routeParams.mlId, {params: {"userName": $rootScope.userName}})
+    $http.get('movie/' + $routeParams.mlId, {params: {"userName": $rootScope.userName}})
         .success(function (data) {
             $scope.movie = data;
         });

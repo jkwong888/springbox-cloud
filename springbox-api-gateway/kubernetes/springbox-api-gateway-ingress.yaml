@@ -9,7 +9,7 @@ spec:
       - path: /springbox
         backend:
           serviceName: springbox-api-gateway
-          servicePort: 9000
+          servicePort: 8080
       - path: /uaa
         backend:
           serviceName: springbox-auth-server

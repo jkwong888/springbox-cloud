@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: springbox-auth-server-config
+          name: springbox-auth-server

@@ -3,7 +3,7 @@ var springbox = angular.module('springbox');
 springbox.controller('createReview', function ($location, $rootScope, $scope, $http, $routeParams) {
     $scope.formData = {};
 
-    $http.get('/movie/' + $routeParams.mlId)
+    $http.get('movie/' + $routeParams.mlId)
         .success(function (data) {
             $scope.formData.mlId = data.mlId;
         });
