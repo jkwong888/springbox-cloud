@@ -32,13 +32,13 @@ public class GenreController {
     }
 
     @HystrixCommand(
-		fallbackMethod = "defaultGenre",
+		fallbackMethod = "defaultGenreByMlId",
 		commandProperties = {
 			@HystrixProperty(name = "execution.isolation.strategy", value = "SEMAPHORE")
 		}
 	)
     @RequestMapping(value = "/genres/{mlId}", method = RequestMethod.GET)
-    public Genre genre(@PathVariable String mlId) {
+    public Genre genreByMlId(@PathVariable String mlId) {
         return genreRepository.findByMlId(mlId);
     }
     
@@ -46,7 +46,7 @@ public class GenreController {
     	return Collections.emptyList();
     }
     
-    public Genre defaultGenre(String mlId) {
+    public Genre defaultGenreByMlId(String mlId) {
     	final Genre g = new Genre();
     	
     	g.setMlId(mlId);

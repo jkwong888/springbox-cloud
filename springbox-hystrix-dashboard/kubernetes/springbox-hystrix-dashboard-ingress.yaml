@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: springbox-hystrix-dashboard
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /hystrix-dashboard
+        backend:
+          serviceName: springbox-hystrix-dashboard
+          servicePort: 8080

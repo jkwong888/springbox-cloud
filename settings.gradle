@@ -6,6 +6,7 @@ include ':springbox-reviews'
 include ':springbox-recommendations'
 include ':springbox-api-gateway'
 include ':springbox-auth-server'
+include ':springbox-hystrix-dashboard'
 
 project(':springbox-config-server').projectDir = "$rootDir/springbox-config-server" as File
 project(':springbox-eureka').projectDir = "$rootDir/springbox-eureka" as File
@@ -14,3 +15,4 @@ project(':springbox-reviews').projectDir = "$rootDir/springbox-reviews" as File
 project(':springbox-recommendations').projectDir = "$rootDir/springbox-recommendations" as File
 project(':springbox-api-gateway').projectDir = "$rootDir/springbox-api-gateway" as File
 project(':springbox-auth-server').projectDir = "$rootDir/springbox-auth-server" as File
+project(':springbox-hystrix-dashboard').projectDir = "$rootDir/springbox-hystrix-dashboard" as File

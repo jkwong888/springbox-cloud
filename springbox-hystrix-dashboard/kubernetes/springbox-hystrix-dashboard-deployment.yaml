@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: springbox
+    component: hystrix-dashboard
+  name: springbox-hystrix-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springbox
+      component: hystrix-dashboard
+  template:
+    metadata:
+      labels:
+        app: springbox
+        component: hystrix-dashboard
+    spec:
+      containers:
+      - image: jkwong/springbox-hystrix-dashboard:latest
+        imagePullPolicy: Always
+        name: springbox-hystrix-dashboard
+        ports:
+        - containerPort: 8080
+          name: http 
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: springbox-hystrix-dashboard

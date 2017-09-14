@@ -31,7 +31,7 @@ subprojects {
   targetCompatibility = 1.8
 
   docker {
-    name "${project.name}:${project.version}"
+    name "jkwong/${project.name}:latest"
     copySpec.into("/")
       .include("**/${project.name}-${project.version}.jar")
       .from("build/libs") 
@@ -66,7 +66,6 @@ subprojects {
   dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp'
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test') {

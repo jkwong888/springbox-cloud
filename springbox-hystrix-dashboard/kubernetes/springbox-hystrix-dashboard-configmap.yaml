@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springbox-hystrix-dashboard
+  labels:
+    app: springbox
+    component: hystrix-dashboard
+data:
+  application.yaml: |+
+    logging:
+      logging:
+        org.springframework.web: DEBUG
+    
+  bootstrap.yaml: |+
+    spring:
+      application:
+        name: springbox-hystrix-dashboard
+      cloud:
+        config:
+          uri: http://springbox-config-server:8888
