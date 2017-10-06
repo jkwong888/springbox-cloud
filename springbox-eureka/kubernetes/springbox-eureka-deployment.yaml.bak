@@ -3,26 +3,26 @@ apiVersion: extensions/v1beta1
 metadata:
   labels:
     app: springbox
-    component: api-gateway
-  name: springbox-api-gateway
+    component: eureka
+  name: springbox-eureka
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: springbox
-      component: api-gateway
+      component: eureka
   template:
     metadata:
       labels:
         app: springbox
-        component: api-gateway
+        component: eureka
     spec:
       containers:
-      - image: jkwong/springbox-api-gateway:latest
+      - image: jkwong/springbox-eureka:latest
         imagePullPolicy: Always
-        name: springbox-api-gateway
+        name: springbox-eureka
         ports:
-        - containerPort: 8080
+        - containerPort: 8761
           name: http 
           protocol: TCP
         resources:
@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: wobbly-goose-spring-config-server-bootstrap
+          name: springbox-eureka

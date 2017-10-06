@@ -3,11 +3,13 @@ description = 'springbox-reviews'
 dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-hystrix-stream'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector'
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector') {
-exclude(module: 'log4j')
+        exclude(module: 'log4j')
     }
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka') {
         exclude(module: 'guice-grapher')

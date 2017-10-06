@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: springbox-auth-server
+          name: wobbly-goose-spring-config-server-bootstrap

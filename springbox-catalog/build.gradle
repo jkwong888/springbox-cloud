@@ -6,6 +6,8 @@ dependencies {
     compile group: 'org.hsqldb', name: 'hsqldb'
     compile group: 'postgresql', name: 'postgresql', version:'9.1-901-1.jdbc4'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-hystrix-stream'
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector') {

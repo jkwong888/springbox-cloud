@@ -3,10 +3,15 @@ kind: Ingress
 metadata:
   name: springbox-api-gateway
 spec:
+  tls:
+  - hosts:
+    - jkwong-kube-422189.us-south.containers.mybluemix.net
+    secretName: jkwong-kube-422189
   rules:
-  - http:
+  - host: jkwong-kube-422189.us-south.containers.mybluemix.net
+    http:
       paths:
-      - path: /springbox
+      - path: /
         backend:
           serviceName: springbox-api-gateway
           servicePort: 8080

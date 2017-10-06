@@ -8,8 +8,7 @@ spec:
       name: springbox-reviews-job-populate-db
       labels:
         app: springbox
-        component: reviews
-        job: populate-db
+        job: reviews-populate-db
     spec:
       restartPolicy: Never
       containers:

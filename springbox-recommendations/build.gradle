@@ -6,6 +6,8 @@ dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-security'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-hystrix-stream'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-oauth2'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-neo4j'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
